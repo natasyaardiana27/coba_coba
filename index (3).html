@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Natasya's Monitoring System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-avatar">N</div>
+        <div class="brand-info">
+          <h2>Natasya's</h2>
+          <span>MONITORING SYSTEM</span>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-header">
+          <span id="statusDot" class="dot-online"></span>
+          <span id="connectionText">Terhubung</span>
+        </div>
+        <div class="status-details">
+          <div><span>Status</span><strong id="statusDetail">Terhubung</strong></div>
+          <div><span>Uptime</span><strong id="uptime">00:00:46</strong></div>
+          <div><span>Interval</span><strong>5 Detik</strong></div>
+        </div>
+      </div>
+
+      <div class="sidebar-actions">
+        <small id="lastUpdated">Terakhir --:--:--</small>
+        <button id="refreshBtn" class="btn-refresh" type="button">↻ Refresh Data</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <p>NATASYA IOT v2.0</p>
+        <small>© 2026 Realtime System</small>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      
+      <!-- SECTION GRAFIK -->
+      <section class="card chart-card">
+        <div class="card-header">
+          <div>
+            <span class="badge">TELEMETRI REALTIME</span>
+            <h1>Grafik Monitoring Sensor</h1>
+          </div>
+          <div class="legend-group">
+            <span class="leg leg-temp">• Suhu (°C)</span>
+            <span class="leg leg-hum">• Kelembapan (%)</span>
+            <span class="leg leg-dist">• Jarak (cm)</span>
+          </div>
+        </div>
+
+        <!-- Wrapper khusus agar Chart.js tidak kepotong/hilang -->
+        <div class="chart-wrapper">
+          <canvas id="sensorChart"></canvas>
+        </div>
+
+        <div class="chart-footer">
+          <span id="readingCount">0 Data Tersimpan</span>
+          <span class="auto-refresh">• Auto Refresh Active</span>
+        </div>
+      </section>
+
+      <!-- SECTION METRIK & LOG -->
+      <div class="bottom-row">
+        
+        <!-- METRICS -->
+        <div class="metrics-container">
+          
+          <div class="metric-card card-temp">
+            <div class="m-head">
+              <span>Suhu Ruangan</span>
+              <span class="chip">DHT11</span>
+            </div>
+            <div class="m-body">
+              <strong id="tempVal">29.9</strong><small>°C</small>
+            </div>
+            <span class="m-sub">stabil vs lalu</span>
+            <div class="progress-bg"><div id="tempBar" class="progress-fill" style="width: 60%;"></div></div>
+            <div class="m-foot"><span>0°C</span><span>50°C</span></div>
+          </div>
+
+          <div class="metric-card card-hum">
+            <div class="m-head">
+              <span>Kelembapan Udara</span>
+              <span class="chip">DHT11</span>
+            </div>
+            <div class="m-body">
+              <strong id="humVal">63.0</strong><small>%</small>
+            </div>
+            <span class="m-sub">stabil vs lalu</span>
+            <div class="progress-bg"><div id="humBar" class="progress-fill" style="width: 63%;"></div></div>
+            <div class="m-foot"><span>0%</span><span>100%</span></div>
+          </div>
+
+          <div class="metric-card card-dist">
+            <div class="m-head">
+              <span>Jarak Objek</span>
+              <span class="chip">HC-SR04</span>
+            </div>
+            <div class="m-body">
+              <strong id="distVal">3.9</strong><small>cm</small>
+            </div>
+            <span class="m-sub">stabil vs lalu</span>
+            <div class="progress-bg"><div id="distBar" class="progress-fill" style="width: 10%;"></div></div>
+            <div class="m-foot"><span>0 cm</span><span>400 cm</span></div>
+          </div>
+
+        </div>
+
+        <!-- EVENT LOG -->
+        <div class="card log-card">
+          <div class="card-header">
+            <div>
+              <span class="badge">SYSTEM LOG</span>
+              <h2>Catatan Event</h2>
+            </div>
+            <span class="log-count" id="logCounter">0</span>
+          </div>
+          <div class="log-list" id="logList">
+            <!-- Log item dimasukkan via JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
